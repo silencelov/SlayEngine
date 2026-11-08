@@ -6,7 +6,10 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          node-version: 20
 
       - name: Get JUCE
         uses: actions/checkout@v4
@@ -14,6 +17,7 @@ jobs:
           repository: juce-framework/JUCE
           ref: master
           path: JUCE
+          node-version: 20
 
       - name: Configure CMake
         run: cmake -B build -G "Visual Studio 17 2022" -A x64
