@@ -5,19 +5,18 @@ on: [push, workflow_dispatch]
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
-      - name: Checkout code
+      - name: Checkout project code
         uses: actions/checkout@v4
-        with:
-          node-version: 20
 
-      - name: Get JUCE
+      - name: Checkout JUCE framework
         uses: actions/checkout@v4
         with:
           repository: juce-framework/JUCE
           ref: master
           path: JUCE
-          node-version: 20
 
       - name: Configure CMake
         run: cmake -B build -G "Visual Studio 17 2022" -A x64
